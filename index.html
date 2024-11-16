@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic-Board | Oday</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="options-bar">
+            <div class="title"><h1>Magic Board</h1></div>
+            <div class="options">
+                <div class="options-1">
+                    <button id="undo"><img src="./assets/undo-circular-arrow.png" alt="undo"></button>
+                    <button class="tool" id="eraser"><img src="./assets/eraser2.png" alt="eraser"></button>
+                    <button class="active tool" id="brush"><img src="./assets/paint.png" alt="brush"></button>
+                    <button id="redo"><img src="./assets/redo-arrow-symbol.png" alt="redo"></button>
+                </div>
+                <div>
+                    <input type="range" min="1" max="30" value="5" id="sizeSlider">
+                </div>
+            </div>
+            <div class="colors">
+                <button class="color selected"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+                <button class="color"></button>
+            </div>
+            <div class="shapes">
+                <button id="triangle" class="tool">
+                    <img src="assets/triangle.svg" alt="trianlge">
+                </button>
+                <button id="rectangle" class="tool">
+                    <img src="assets/rectangle.svg" alt="rectangle">
+                </button>
+                <button id="circle" class="tool">
+                    <img src="assets/circle.svg" alt="circle">
+                </button>
+                <input type="checkbox" id="fillColor">
+            </div>
+            <div class="functions">
+                <button class="clear-canvas">Clear Canvas</button>
+                <button class="save-img">Save As Image</button>
+                <button class="upload-img">Upload Image</button>
+            </div>
+        </div>
+        <div class="drawing-board">
+            <canvas></canvas>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
