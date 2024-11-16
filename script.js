@@ -3,6 +3,7 @@ toolBtns = document.querySelectorAll(".tool");
 fillColor = document.querySelector("#fillColor");
 sizeSlider = document.querySelector("#sizeSlider");
 colorBtns = document.querySelectorAll(".colors .color");
+colorPicker = document.querySelector("#color-picker");
 clearCanvas = document.querySelector(".clear-canvas");
 saveImage = document.querySelector(".save-img");
 uploadImage = document.querySelector(".upload-img");
@@ -167,6 +168,13 @@ colorBtns.forEach((btn) => {
       .getComputedStyle(btn)
       .getPropertyValue("background-color");
   });
+});
+
+colorPicker.addEventListener("change", () => {
+  // Set the color picker value to the selected color
+  colorPicker.parentElement.style.backgroundcolor = colorPicker.value;
+  selectedColor = colorPicker.value;
+  colorBtns.parentElement.click();
 });
 
 clearCanvas.addEventListener("click", () => {
