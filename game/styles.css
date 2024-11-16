@@ -50,6 +50,7 @@ label {
 
 .board {
     display: grid;
+    place-items: center;
     gap: 10px;
     margin-bottom: 20px;
     padding: 20px;
