@@ -34,7 +34,7 @@ body{
 .container .options-bar .title{
     display: flex;
     justify-content: center;
-    background: #8dc1bf;
+    background:linear-gradient(135deg, #FFDEE9, #B5FFFC)#8dc1bf;
     padding: 5px;
     border-radius: 8px;
 }
@@ -50,7 +50,7 @@ body{
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background-color: #85d0cc;
+    background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
     padding: 15px;
     border-radius: 8px;
 }
@@ -82,7 +82,7 @@ body{
     grid-template-columns: repeat(4, 1fr); /* 4 buttons in a row */
     grid-template-rows: repeat(4, 1fr); /* Adjust the number of rows as needed */
     gap: 10px; /* Adjust this value to control spacing between buttons */
-    background-color: #85d0cc;
+    background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
     padding: 15px;
     border-radius: 8px;
 }
@@ -193,7 +193,7 @@ body{
 
 .container .options-bar .shapes{
     padding: 15px;
-    background-color: #85d0cc;
+    background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -214,51 +214,40 @@ body{
 .container .options-bar .shapes button img{
     width: 30px;
     height: auto;
-    color: red;
     background: transparent;
 }
 
 .container .options-bar .functions{
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+    align-items: center;
+    justify-content: space-evenly;
+    background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .container .options-bar .functions button{
     color: #fff;
     border: none;
     outline: none;
-    padding: 11px 0;
     font-size: 0.9rem;
     margin-top: 10px;
     border-radius: 5px;
     cursor: pointer;
+    padding: 0;
+    background: transparent;
 }
 
-.container .options-bar .functions .clear-canvas{
-    color: #6C757D;
-    border: 1px solid #6C757D;
-    transition: all 0.3s ease;
+.container .options-bar .functions button img{
+    width: 50px;
+    height: auto;
 }
 
-.container .options-bar .functions .clear-canvas:hover{
-    color: #fff;
-    background: #6C757D;
-}
-
-.container .options-bar .functions .save-img{
-    background: #85d0cc;
-    border: 1px solid #85d0cc;
-}
-
-.container .options-bar .functions .upload-img{
-    background: #85d0cc;
-    border: 1px solid #85d0cc;
-}
 
 .drawing-board{
     flex: 1;
-    border: 2px solid #e0e0e0;;
+    border: 2px solid #e0e0e0;
     border-radius: 7px;
     background-color: white;
 }
