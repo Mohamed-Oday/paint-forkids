@@ -20,7 +20,7 @@ isDrawing = false;
 selectedTool = "brush";
 brushWidth = sizeSlider.value;
 selectedColor = "#000";
-canvas.style.cursor = "url('./icons/t1.png'), crosshair";
+canvas.style.cursor = selectedTool === "brush" ? "url('./assets/t1.png'), crosshair" : "crosshair";
 
 const setCanvasBackground = () => {
   ctx.fillStyle = "#fff";

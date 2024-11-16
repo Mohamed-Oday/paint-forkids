@@ -111,7 +111,7 @@ body{
 }
 
 .container .options-bar .colors button:nth-child(4){
-    background-color: #4f4c4d;
+    background-color: black;
 }
 
 .container .options-bar .colors button:nth-child(5){
