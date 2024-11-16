@@ -9,6 +9,7 @@ saveImage = document.querySelector(".save-img");
 uploadImage = document.querySelector(".upload-img");
 underArrow = document.querySelector("#undo");
 redoArrow = document.querySelector("#redo");
+arcadeBtn = document.querySelector(".arcade");
 ctx = canvas.getContext("2d");
 
 let undoStack = [];
@@ -207,6 +208,10 @@ uploadImage.addEventListener("click", () =>{
         reader.readAsDataURL(file);
     });
 })
+
+arcadeBtn.addEventListener("click", () => {
+  window.location.href = 'http://127.0.0.1:5500/game/';
+});
 
 canvas.addEventListener("mousedown", startDrawing);
 canvas.addEventListener("mousemove", drawing);

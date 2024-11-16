@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Match Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Memory Match Game</h1>
+        <div class="difficulty-selector">
+            <label for="difficulty">Select Difficulty:</label>
+            <select id="difficulty">
+                <option value="easy">Easy (6 pairs)</option>
+                <option value="medium">Medium (12 pairs)</option>
+                <option value="hard">Hard (18 pairs)</option>
+            </select>
+        </div>
+        <div class="board"></div>
+        <div class="score-board">
+            <p>Moves: <span id="moves">0</span></p>
+            <p>Time: <span id="time">0</span> seconds</p>
+        </div>
+        <div class="btns">
+            <button id="reset"><img src="assets/game-play.png" alt="start"></button>
+            <button class="paint"><img src="assets/paint.png" alt="paint"></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
