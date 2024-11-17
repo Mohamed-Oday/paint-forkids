@@ -28,7 +28,8 @@ body{
     flex-direction: column;
     border: 2px solid #e0e0e0;
     padding: 15px;
-    gap: 10px;;
+    gap: 10px;
+    transition: border 0.3s ease, padding 0.3s ease;
 }
 
 .container .options-bar .title{
@@ -37,11 +38,31 @@ body{
     background:linear-gradient(135deg, #FFDEE9, #B5FFFC)#8dc1bf;
     padding: 5px;
     border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
 }
 
 .container .options-bar .title h1{
     text-align: center;
     color: #6b3c5e;
+}
+
+.container .options-bar .options,
+.container .options-bar .colors,
+.container .options-bar .shapes,
+.container .options-bar .functions {
+    display: flex;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.container .options-bar .options,
+.container .options-bar .colors,
+.container .options-bar .shapes,
+.container .options-bar .functions {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .container .options-bar .options{
@@ -252,7 +273,12 @@ body{
     background-color: white;
 }
 
-.drawing-board canvas{
+.drawing-board .canvas{
+    width: 1150px;
+    height: 100%;
+}
+
+.drawing-board .canvas.fixed{
     width: 100%;
     height: 100%;
 }

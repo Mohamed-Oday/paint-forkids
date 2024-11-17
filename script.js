@@ -1,4 +1,4 @@
-const canvas = document.querySelector("canvas");
+const canvas = document.querySelector(".canvas");
 toolBtns = document.querySelectorAll(".tool");
 fillColor = document.querySelector("#fillColor");
 sizeSlider = document.querySelector("#sizeSlider");
@@ -10,6 +10,14 @@ uploadImage = document.querySelector(".upload-img");
 underArrow = document.querySelector("#undo");
 redoArrow = document.querySelector("#redo");
 arcadeBtn = document.querySelector(".arcade");
+// 
+menuButton = document.querySelector(".title");
+options = document.querySelector(".options");
+colors = document.querySelector(".colors");
+shapes = document.querySelector(".shapes");
+functions = document.querySelector(".functions");
+optionsBar = document.querySelector(".options-bar")
+//
 ctx = canvas.getContext("2d");
 
 let undoStack = [];
@@ -211,6 +219,36 @@ uploadImage.addEventListener("click", () =>{
 
 arcadeBtn.addEventListener("click", () => {
   window.location.href = 'http://127.0.0.1:5500/game/';
+});
+
+menuButton.addEventListener("click", () => {
+  menuButton.classList.toggle("display");
+  if (!menuButton.classList.contains("display")){
+    options.style.display = "none";
+    colors.style.display = "none";
+    shapes.style.display = "none";
+    functions.style.display = "none";
+    optionsBar.style.border = "none";
+    optionsBar.style.padding = 0;
+    menuButton.style.padding = '5px 30px';
+    menuButton.style.transform = 'rotate(-90deg)';
+    menuButton.style.marginRight = '-118px';
+    menuButton.style.marginTop = '112px';
+    menubar.style.border = "2px solid #e0e0e0";
+    canvas.classList.remove("fixed");
+  }else{
+    options.style.display = "flex";
+    colors.style.display = "grid";
+    shapes.style.display = "flex";
+    functions.style.display = "flex";
+    optionsBar.style.border = "2px solid #e0e0e0";
+    optionsBar.style.padding = '15px';
+    menuButton.style.padding = '5px';
+    menuButton.style.transform = 'rotate(0deg)'
+    menuButton.style.margin = '0';
+    menubar.style.border = "none";
+    canvas.classList.add("fixed");
+  }
 });
 
 canvas.addEventListener("mousedown", startDrawing);
