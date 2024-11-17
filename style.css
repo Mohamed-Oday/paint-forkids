@@ -265,7 +265,6 @@ body{
     height: auto;
 }
 
-
 .drawing-board{
     flex: 1;
     border: 2px solid #e0e0e0;
@@ -273,12 +272,9 @@ body{
     background-color: white;
 }
 
-.drawing-board .canvas{
-    width: 1150px;
-    height: 100%;
-}
-
-.drawing-board .canvas.fixed{
+.drawing-board canvas{
+    position: relative;
     width: 100%;
     height: 100%;
 }
+

@@ -1,4 +1,4 @@
-const canvas = document.querySelector(".canvas");
+const canvas = document.querySelector("canvas");
 toolBtns = document.querySelectorAll(".tool");
 fillColor = document.querySelector("#fillColor");
 sizeSlider = document.querySelector("#sizeSlider");
@@ -30,6 +30,8 @@ selectedTool = "brush";
 brushWidth = sizeSlider.value;
 selectedColor = "#000";
 canvas.style.cursor = selectedTool === "brush" ? "url('./assets/t1.png'), crosshair" : "crosshair";
+width = canvas.offsetWidth;
+height = canvas.offsetHeight;
 
 const setCanvasBackground = () => {
   ctx.fillStyle = "#fff";
@@ -45,60 +47,66 @@ window.addEventListener("load", () => {
 });
 
 const drawRectangle = (e) => {
+  const rect = canvas.getBoundingClientRect();
   if (!fillColor.checked) {
     return ctx.strokeRect(
       prevMouseX,
       prevMouseY,
-      e.offsetX - prevMouseX,
-      e.offsetY - prevMouseY
+      e.clientX - rect.left - prevMouseX,
+      e.clientY - rect.top - prevMouseY
     );
   }
   ctx.fillRect(
     prevMouseX,
     prevMouseY,
-    e.offsetX - prevMouseX,
-    e.offsetY - prevMouseY
+    e.clientX - rect.left - prevMouseX,
+    e.clientY - rect.top - prevMouseY
   );
 };
 
 const drawCircle = (e) => {
+  const rect = canvas.getBoundingClientRect();
   ctx.beginPath(); // Start a new path to draw the circle
   // Calculate the radius of the circle
   let radius = Math.sqrt(
-    Math.pow(prevMouseX - e.offsetX, 2) + Math.pow(prevMouseY - e.offsetY, 2)
+    Math.pow(prevMouseX - (e.clientX - rect.left), 2) + Math.pow(prevMouseY - (e.clientY - rect.top), 2)
   );
   ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
   fillColor.checked ? ctx.fill() : ctx.stroke(); // Fill or stroke the circle based on the checkbox
 };
 
 const drawTriangle = (e) => {
-    const thirdPointX = prevMouseX - (e.offsetX - prevMouseX); // Mirror the x-coordinate for the third point
-  
-    ctx.beginPath(); // Start drawing the triangle
-    ctx.moveTo(prevMouseX, prevMouseY); // Start point
-    ctx.lineTo(e.offsetX, e.offsetY); // Second point
-    ctx.lineTo(thirdPointX, e.offsetY); // Third point
-    ctx.closePath(); // Close the triangle
-  
-    if (fillColor.checked) {
-      ctx.fill(); // Fill the triangle
-    } else {
-      ctx.stroke(); // Draw the triangle outline
-    }
-  };
+  const rect = canvas.getBoundingClientRect();
+  const thirdPointX = prevMouseX - (e.clientX - rect.left - prevMouseX); // Mirror the x-coordinate for the third point
+
+  ctx.beginPath(); // Start drawing the triangle
+  ctx.moveTo(prevMouseX, prevMouseY); // Start point
+  ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top); // Second point
+  ctx.lineTo(thirdPointX, e.clientY - rect.top); // Third point
+  ctx.closePath(); // Close the triangle
+
+  if (fillColor.checked) {
+    ctx.fill(); // Fill the triangle
+  } else {
+    ctx.stroke(); // Draw the triangle outline
+  }
+};
   
 const startDrawing = (e) => {
   isDrawing = true;
-  prevMouseX = e.offsetX; // Get the x coordinate of the mouse
-  prevMouseY = e.offsetY; // Get the y coordinate of the mouse
+  const rect = canvas.getBoundingClientRect(); // Ensure to get the latest bounds
+  prevMouseX = e.clientX - rect.left; // Adjust based on current canvas position
+  prevMouseY = e.clientY - rect.top;
+
   ctx.beginPath(); // Start a new path
   ctx.lineWidth = brushWidth; // Set the line width
-  ctx.strokeStyle = selectedColor; // Set the stroke color
+  ctx.strokeStyle = selectedTool === "eraser"? "#fff" : selectedColor; // Set the stroke color
   ctx.fillStyle = selectedColor; // Set the fill color
-
+  
   undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-
-  snapShot = ctx.getImageData(0, 0, canvas.width, canvas.height); // Take a snapshot of the canvas
+  
+  // ADJUSTMENT: Update snapShot here to ensure it matches the current canvas state
+  snapShot = ctx.getImageData(0, 0, canvas.width, canvas.height);
 };
 
 underArrow.addEventListener("click", () => {
@@ -129,9 +137,10 @@ const drawing = (e) => {
   if (!isDrawing) return; // If the mouse is not clicked, don't draw anything
   ctx.putImageData(snapShot, 0, 0); // Restore the canvas to the last snapshot
 
+  const rect = canvas.getBoundingClientRect();
   if (selectedTool === "brush" || selectedTool === "eraser") {
-    ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor; // Set the stroke color
-    ctx.lineTo(e.offsetX, e.offsetY); // Draw a line from the last point to the current point
+    ctx.strokeStyle = selectedTool === "eraser"? "#fff" : selectedColor; // Set the stroke color
+    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top); // Draw a line from the last point to the current point
     ctx.stroke(); // Draw the line
   } else if (selectedTool === "rectangle") {
     drawRectangle(e);
@@ -223,7 +232,11 @@ arcadeBtn.addEventListener("click", () => {
 
 menuButton.addEventListener("click", () => {
   menuButton.classList.toggle("display");
+
+  const saveCanvas = ctx.getImageData(0, 0, canvas.width, canvas.height); 
+
   if (!menuButton.classList.contains("display")){
+    const rect = canvas.getBoundingClientRect();
     options.style.display = "none";
     colors.style.display = "none";
     shapes.style.display = "none";
@@ -232,11 +245,14 @@ menuButton.addEventListener("click", () => {
     optionsBar.style.padding = 0;
     menuButton.style.padding = '5px 30px';
     menuButton.style.transform = 'rotate(-90deg)';
-    menuButton.style.marginRight = '-118px';
-    menuButton.style.marginTop = '112px';
-    menubar.style.border = "2px solid #e0e0e0";
-    canvas.classList.remove("fixed");
+    menuButton.style.marginRight = '-112px';
+    menuButton.style.marginTop = '108px';
+
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    
   }else{
+    const rect = canvas.getBoundingClientRect();
     options.style.display = "flex";
     colors.style.display = "grid";
     shapes.style.display = "flex";
@@ -246,9 +262,12 @@ menuButton.addEventListener("click", () => {
     menuButton.style.padding = '5px';
     menuButton.style.transform = 'rotate(0deg)'
     menuButton.style.margin = '0';
-    menubar.style.border = "none";
-    canvas.classList.add("fixed");
+
+    canvas.width = width;
+    canvas.height = height;
   }
+
+  ctx.putImageData(saveCanvas, 0, 0);
 });
 
 canvas.addEventListener("mousedown", startDrawing);
